@@ -1,0 +1,14 @@
+{
+  "name": "wp-advanced-search",
+  "homepage": "https://github.com/growthspark/wp-advanced-search",
+  "version": "1.1.2",
+  "_release": "1.1.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.1.2",
+    "commit": "45b120d3a4e5f8a4a0cc3de066fd3b7f5211ff21"
+  },
+  "_source": "https://github.com/growthspark/wp-advanced-search.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/growthspark/wp-advanced-search.git"
+}

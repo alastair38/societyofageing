@@ -1,0 +1,14 @@
+{
+  "name": "acf",
+  "homepage": "https://github.com/elliotcondon/acf",
+  "version": "4.3.5",
+  "_release": "4.3.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "4.3.5",
+    "commit": "e95b843738ffb91bbbd3dbd5ce4859af0f27457a"
+  },
+  "_source": "https://github.com/elliotcondon/acf.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/elliotcondon/acf.git"
+}
