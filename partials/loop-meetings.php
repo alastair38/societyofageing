@@ -25,26 +25,46 @@
 	$mypages = get_pages( array( 'child_of' => $post->ID, 'sort_column' => 'post_date', 'sort_order' => 'desc' ) );
 
 	foreach( $mypages as $page ) {
-        $counter++;
 		$content = $page->post_content;
+        $trimContent = wp_trim_words( $content, $num_words = 50, $more = null );
 		if ( ! $content ) // Check for empty page
 			continue;
 
 		$content = apply_filters( 'the_content', $content );
 	?>
 <?php
-        if($counter<3) {?>
+        $featured = get_field('featured', $page->ID);
+        if( $featured) {?>
     <article id="post-<?php the_ID(); ?>" class="large-6 columns" role="article" itemscope itemtype="http://schema.org/WebPage">
-
+<div class="meetingContent">
             <h2><a href="<?php echo get_page_link( $page->ID ); ?>"><?php echo $page->post_title; ?></a></h2>
-		<div class="entry">
-        <?php echo $content; ?>
+
+        <?php echo $trimContent; ?>
+        <?php echo get_the_post_thumbnail($page->ID, 'full');?>
         </div>
     </article>
 <?php }
-	 else {?>
-        <li class="large-4 columns end"><a href="<?php echo get_page_link( $page->ID ); ?>"><?php echo $page->post_title; ?></a></li>
-<?php } }
+	 else { } }
+?>
+
+<h2 id="previousMeetingsTitle" class="columns">Previous Meetings</h2>
+
+<?php
+	$mypages = get_pages( array( 'child_of' => $post->ID, 'sort_column' => 'post_date', 'sort_order' => 'desc' ) );
+
+	foreach( $mypages as $page ) {
+
+	?>
+<?php
+        $featured = get_field('featured', $page->ID);
+        if( !$featured) {?>
+    <article id="post-<?php the_ID(); ?>" class="large-4 medium-6 small-12 columns" role="article" itemscope itemtype="http://schema.org/WebPage">
+
+            <h4 class="previousMeetings"><a href="<?php echo get_page_link( $page->ID ); ?>"><?php echo $page->post_title; ?></a></h4>
+
+    </article>
+<?php }
+	 else { } }
 ?>
 
 

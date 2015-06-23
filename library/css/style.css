@@ -6993,13 +6993,19 @@ NAVIGATION STYLES
 h1.site-title {
   float: left;
   width: auto;
-  font-size: 200%;
+  font-size: 100%;
+  height: 25px;
+  line-height: 25px;
   text-transform: uppercase;
-  margin-bottom: 0;
-  padding: 0 1em;
-  text-align: center; }
+  margin: 10px;
+  padding-left: 8px;
+  padding-right: 4px;
+  letter-spacing: 4px;
+  background: #006080;
+  text-align: center;
+  z-index: 1; }
   h1.site-title a {
-    color: #555555; }
+    color: #FFFFFF; }
 
 .off-canvas-list ul {
   margin-left: 0; }
@@ -7015,20 +7021,139 @@ h1.title a {
   color: #555555; }
 
 /*********************
+HOME PAGE
+*********************/
+.home #content {
+  background: url("http://127.0.0.1/rc11/wp-content/uploads/2015/06/Sociology-of-Ageing_oswald.png") no-repeat;
+  background-size: cover;
+  min-height: 95vh;
+  padding-left: 2em;
+  padding-right: 2em; }
+.home #main {
+  padding: .5em;
+  margin-bottom: 3em; }
+.home article, .home aside {
+  padding: 3em 1em;
+  height: 25em;
+  background: rgba(255, 255, 255, 0.95); }
+
+ul#homeLinks {
+  text-align: center;
+  margin-left: 0;
+  position: relative; }
+
+ul#homeLinks li {
+  display: inline-block;
+  width: 47%; }
+  ul#homeLinks li a {
+    display: block;
+    color: #FFFFFF;
+    font-size: 130%;
+    width: 100%;
+    padding: .25em;
+    background: #444444;
+    transition: 350ms; }
+    ul#homeLinks li a:hover, ul#homeLinks li a:focus {
+      background: #006080; }
+  ul#homeLinks li:first-of-type {
+    position: absolute;
+    left: 0; }
+  ul#homeLinks li:last-of-type {
+    position: absolute;
+    right: 0; }
+
+#latestNewsTitle {
+  text-align: center; }
+
+.latestNews {
+  margin: .5em 0em; }
+  .latestNews a:focus, .latestNews a:hover > h6 {
+    color: #555555; }
+  .latestNews h6 {
+    display: inline;
+    color: #006080; }
+  .latestNews img {
+    border-radius: 50%;
+    border: 5px solid transparent;
+    transition: 300ms; }
+    .latestNews img:hover {
+      border: 5px solid #006080; }
+
+/*********************
+MEETINGS PAGE
+*********************/
+.page #main {
+  background: #FFFFFF; }
+
+/*********************
+MEETINGS PAGE
+*********************/
+.meetingContent {
+  padding: 0.5em; }
+  .meetingContent img {
+    width: 100%; }
+
+#previousMeetingsTitle {
+  text-align: center;
+  margin-top: 1em;
+  background: #006080;
+  color: #FFFFFF; }
+
+.previousMeetings {
+  text-align: center; }
+
+.page-parent #main {
+  background: #FFFFFF; }
+  .page-parent #main h1 {
+    border-bottom: 1px solid #AAAAAA; }
+
+.page-child #main {
+  background: #FFFFFF; }
+
+/*********************
 AUTHORS PAGE
 *********************/
+.page-template-page-committee .authorAvatar {
+  opacity: .5;
+  transition: 300ms; }
+
+.page-template-page-committee #main {
+  background: #FFFFFF; }
+
 .author {
   position: relative;
   padding: 0; }
 
+h2.authorName:hover + .authorAvatar,
+h2.authorName:focus + .authorAvatar {
+  opacity: 1 !important; }
+
+h2.authorName a:focus {
+  text-decoration: underline !important; }
+
+h2.authorPosts {
+  text-align: center;
+  font-weight: 400;
+  margin: 1em 0; }
+
+.authorDescription {
+  margin-top: 1em; }
+
+.author #main {
+  background: #FFFFFF; }
+
+.page .authorInfo {
+  height: 340px;
+  margin: 0.5em;
+  border: 1px solid #AAAAAA; }
+
 .authorInfo {
   position: relative;
   background: #FFFFFF;
-  padding: .5em;
-  margin: .5em; }
+  padding: .5em; }
   .authorInfo .authorAvatar img {
     border-radius: 50%;
-    top: 10px;
+    top: 1em;
     left: 50%;
     margin-left: -40px;
     position: absolute; }
@@ -7042,12 +7167,51 @@ AUTHORS PAGE
       margin: 10px 0; }
       .authorInfo ul li a {
         color: #FFFFFF; }
-        .authorInfo ul li a:hover {
+        .authorInfo ul li a:hover, .authorInfo ul li a:focus {
           color: #f2f071; }
   .authorInfo h2 {
-    line-height: 75px;
-    margin-top: 75px;
-    text-align: center; }
+    margin-top: 100px;
+    text-align: center;
+    font-weight: 400; }
+
+ul#singleAuthor {
+  text-align: center; }
+  ul#singleAuthor li {
+    display: inline-block;
+    font-size: 80%;
+    width: 25%;
+    margin: 0 2%; }
+
+.allAuthors {
+  padding: 0.5em;
+  margin: 1.5em 0;
+  background: #FAFAFA; }
+  .allAuthors h3 {
+    font-size: 135%;
+    text-align: center;
+    font-weight: 400;
+    padding: .5em 0; }
+  .allAuthors h4 {
+    font-size: 110%;
+    text-align: center;
+    font-weight: 400; }
+
+.authorInfo span {
+  display: block;
+  text-align: center; }
+  .authorInfo span#member {
+    text-transform: uppercase;
+    font-weight: 400; }
+
+/*********************
+CATEGORY / TAXONOMY PAGES
+*********************/
+.archive #main {
+  background: #FFFFFF; }
+
+#taxHeader {
+  text-align: center;
+  margin-bottom: 1em; }
 
 /*********************
 POSTS & CONTENT STYLES
@@ -7055,7 +7219,10 @@ POSTS & CONTENT STYLES
 #content {
   padding-top: 3em; }
   #content #inner-content {
-    padding: 4rem 0rem 1rem 0rem; }
+    padding: 1rem 0rem 1rem 0rem; }
+
+.single #main {
+  background: #FFFFFF; }
 
 /* end .hentry */
 .page-title {
@@ -7416,6 +7583,9 @@ you can add resource intensive styles.
   *********************/
   .wrap {
     max-width: 1140px; }
+
+  #content #inner-content {
+    padding: 4rem 0rem 1rem 0rem; }
 
   /*********************
   HEADER STYLES

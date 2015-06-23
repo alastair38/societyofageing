@@ -193,6 +193,15 @@ function fb_add_custom_user_profile_fields( $user ) {
 				<span class="description"><?php _e('Please enter your job title.', 'your_textdomain'); ?></span>
 			</td>
 		</tr>
+         <tr>
+			<th>
+				<label for="organisation"><?php _e('Organisation', 'your_textdomain'); ?>
+			</label></th>
+			<td>
+                <input type="text" name="organisation" id="organisation" value="<?php echo esc_attr( get_the_author_meta( 'organisation', $user->ID ) ); ?>" class="regular-text"/><br />
+				<span class="description"><?php _e('Please enter your academic institution.', 'your_textdomain'); ?></span>
+			</td>
+		</tr>
 		  <tr>
 			<th>
 				<label for="twitter"><?php _e('Twitter', 'your_textdomain'); ?>
@@ -220,6 +229,7 @@ function fb_save_custom_user_profile_fields( $user_id ) {
 		return FALSE;
 
 	update_usermeta( $user_id, 'jobTitle', $_POST['jobTitle'] );
+	update_usermeta( $user_id, 'organisation', $_POST['organisation'] );
 	update_usermeta( $user_id, 'twitter', $_POST['twitter'] );
 	update_usermeta( $user_id, 'linkedin', $_POST['linkedin'] );
 }
@@ -253,25 +263,120 @@ function pw_remove_emojicons()
 }
 add_action( 'init', 'pw_remove_emojicons' );
 
-//Change author and editor role names to RC11 Member and Committee Member, respectively
+//Get user role function lets a conditional be used in author.php to check user role and output content accordingly
 
-function change_role_name() {
-    global $wp_roles;
-
-    if ( ! isset( $wp_roles ) )
-        $wp_roles = new WP_Roles();
-
-    //You can list all currently available roles like this...
-    //$roles = $wp_roles->get_names();
-    //print_r($roles);
-
-    //You can replace "administrator" with any other role "editor", "author", "contributor" or "subscriber"...
-    $wp_roles->roles['editor']['name'] = 'Committee Member';
-    $wp_roles->role_names['editor'] = 'Committee Member';
-
-    $wp_roles->roles['author']['name'] = 'RC11 Member';
-    $wp_roles->role_names['author'] = 'RC11 Member';
+function get_user_role($id)
+{
+    $user = new WP_User($id);
+    return array_shift($user->roles);
 }
-add_action('init', 'change_role_name');
+
+//Add RC11 Member and Committee Member role - both with identical editing rights, but separating the roles allows for the Committee Page Template to work
+
+$result = add_role( 'president', __(
+
+'President' ),
+
+array(
+
+'read' => true, // true allows this capability
+'edit_posts' => true, // Allows user to edit their own posts
+'edit_pages' => true, // Allows user to edit pages
+'publish_pages' => true,
+'edit_others_posts' => true, // Allows user to edit others posts not just their own
+'create_posts' => true, // Allows user to create new posts
+'manage_categories' => false, // Allows user to manage post categories
+'publish_posts' => true, // Allows the user to publish, otherwise posts stays in draft mode
+'edit_themes' => false, // false denies this capability. User can’t edit your theme
+'install_plugins' => false, // User cant add new plugins
+'update_plugin' => false, // User can’t update any plugins
+'update_core' => false // user cant perform core updates
+
+));
+
+$result = add_role( 'secretary', __(
+
+'Secretary' ),
+
+array(
+
+'read' => true, // true allows this capability
+'edit_posts' => true, // Allows user to edit their own posts
+'edit_pages' => true, // Allows user to edit pages
+'publish_pages' => true,
+'edit_others_posts' => true, // Allows user to edit others posts not just their own
+'create_posts' => true, // Allows user to create new posts
+'manage_categories' => false, // Allows user to manage post categories
+'publish_posts' => true, // Allows the user to publish, otherwise posts stays in draft mode
+'edit_themes' => false, // false denies this capability. User can’t edit your theme
+'install_plugins' => false, // User cant add new plugins
+'update_plugin' => false, // User can’t update any plugins
+'update_core' => false // user cant perform core updates
+
+));
+
+$result = add_role( 'committee_member', __(
+
+'Committee Member' ),
+
+array(
+
+'read' => true, // true allows this capability
+'edit_posts' => true, // Allows user to edit their own posts
+'edit_pages' => true, // Allows user to edit pages
+'publish_pages' => true,
+'edit_others_posts' => true, // Allows user to edit others posts not just their own
+'create_posts' => true, // Allows user to create new posts
+'manage_categories' => false, // Allows user to manage post categories
+'publish_posts' => true, // Allows the user to publish, otherwise posts stays in draft mode
+'edit_themes' => false, // false denies this capability. User can’t edit your theme
+'install_plugins' => false, // User cant add new plugins
+'update_plugin' => false, // User can’t update any plugins
+'update_core' => false // user cant perform core updates
+
+));
+
+$result = add_role( 'rc_member', __(
+
+'RC11 Member' ),
+
+array(
+
+'read' => true, // true allows this capability
+'edit_posts' => true, // Allows user to edit their own posts
+'edit_pages' => false, // Allows user to edit pages
+'publish_pages' => false,
+'edit_others_posts' => false, // Allows user to edit others posts not just their own
+'create_posts' => true, // Allows user to create new posts
+'manage_categories' => false, // Allows user to manage post categories
+'publish_posts' => true, // Allows the user to publish, otherwise posts stays in draft mode
+'edit_themes' => false, // false denies this capability. User can’t edit your theme
+'install_plugins' => false, // User cant add new plugins
+'update_plugin' => false, // User can’t update any plugins
+'update_core' => false // user cant perform core updates
+
+));
+
+add_filter( 'pre_get_posts', 'my_get_posts' );
+
+
+//adds contributions CPT to the author page query
+
+function my_get_posts( $query ) {
+
+	if ( is_author() && $query->is_main_query() )
+		$query->set( 'post_type', array( 'post', 'page', 'contributions', 'report' ) );
+
+	return $query;
+}
+
+add_action('init', 'soa_author_base');
+function soa_author_base(){
+    global $wp_rewrite;
+    $author_slug = 'member_contribution';
+    $wp_rewrite->author_base=$author_slug;
+}
+
+//testing custom capabilities
 
 ?>

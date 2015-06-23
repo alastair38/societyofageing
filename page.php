@@ -4,7 +4,7 @@
 
 				<div id="inner-content" class="row">
 
-				    <div id="main" class="large-8 medium-8 columns" role="main">
+				    <div id="main" class="small-12 columns" role="main">
 
 					    	<?php get_template_part( 'partials/loop', 'page' ); ?>
 

@@ -1,4 +1,4 @@
-<article id="post-<?php the_ID(); ?>" <?php post_class(''); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
+<article id="post-<?php the_ID(); ?>" class="large-8 medium-8 small-12 columns" role="article" itemscope itemtype="http://schema.org/BlogPosting">
 
 	<header class="article-header">
 		<h1 class="entry-title single-title" itemprop="headline"><?php the_title(); ?></h1>
@@ -16,3 +16,8 @@
 	<?php comments_template(); ?>
 
 </article> <!-- end article -->
+
+<div class="large-4 medium-4 small-12 columns">
+    <?php get_sidebar(); ?>
+</div>
+

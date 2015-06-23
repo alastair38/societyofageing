@@ -459,11 +459,11 @@ $topbar-dropdown-arrows: true !default; //Set false to remove the \00bb >> text 
     .js-generated { display: block; }
 
 
-    // Top Bar styles intended for screen sizes above the breakpoint.
+    // Top Bar styles intended for screen sizes above the breakpoint. Removed overflow: visible as contricting site.title clickable area
     @media #{$topbar-media-query} {
       .top-bar {
         @include clearfix;
-        overflow: visible;
+          overflow: visible;
 
         .toggle-topbar { display: none; }
 
